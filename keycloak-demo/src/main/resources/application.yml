@@ -1,0 +1,14 @@
+server:
+  port: 9090
+  onnection-timeout = 6000
+
+keycloak:
+  realm: armada
+  auth-server-url: http://localhost:8080
+  resource: armada-keycloak
+  public-client: true
+  bearer-only: true
+  use-resource-role-mappings: true
+  ssl-required: external
+  credentials:
+    secret: <Secret>

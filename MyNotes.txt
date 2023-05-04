@@ -1,0 +1,92 @@
+Keyclock using Docker:
+--------------------------
+1. Use this cmd to install keyclock in docker 
+
+	> docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.1.0 start-dev
+
+Log in to the Admin Console
+	a. Go to the Keycloak Admin Console(http://localhost:8080/admin).
+	b. Log in with the username and password you created earlier.
+	
+==============================================================================
+Installing Scoop:
+-----------------
+Open a PowerShell terminal (version 5.1 or later) and run:
+
+	> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
+	> irm get.scoop.sh | iex
+
+a) How to install helm:
+----------------------
+	> scoop install helm
+
+b) How to install terraform:
+-----------------------------
+	> scoop install terraform
+	
+c) How to install AWS Cli:
+------------------------------
+	> scoop install awscli@1
+	
+PS C:\Users\user> scoop install awscli@1
+WARN  Given version (1) does not match manifest ()
+WARN  Attempting to generate manifest for 'awscli' (1)
+'awscli' does not have autoupdate capability
+couldn't find manifest for 'awscli@1'
+PS C:\Users\user> scoop install awscli
+Couldn't find manifest for 'awscli'.
+---------------------------------------------------
+	> scoop install awscli
+
+PS C:\Users\user> scoop install aws
+Installing 'aws' (2.11.15) [64bit] from main bucket
+AWSCLIV2-2.11.15.msi (36.1 MB) [==============================================================================] 100%
+Checking hash of AWSCLIV2-2.11.15.msi ... ok.
+Extracting AWSCLIV2-2.11.15.msi ... done.
+Linking ~\scoop\apps\aws\current => ~\scoop\apps\aws\2.11.15
+Creating shim for 'aws'.
+Creating shim for 'aws_completer'.
+'aws' (2.11.15) was installed successfully!
+	
+d) How to install kubectl:
+----------------------------
+	> scoop install kubectl
+	
+e) How to install Jenkins into local / remote K8S cluster:
+-----------------------------------------------------------
+PS C:\Users\user> helm repo add jenkins https://charts.jenkins.io
+"jenkins" has been added to your repositories
+
+PS C:\Users\user> helm install jenkins/jenkins --generate-name
+NAME: jenkins-1682524528
+LAST DEPLOYED: Wed Apr 26 21:25:32 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get your 'admin' user password by running:
+  kubectl exec --namespace default -it svc/jenkins-1682524528 -c jenkins -- /bin/cat /run/secrets/additional/chart-admin-password && echo
+  
+  onal/chart-admin-password
+  Nn5xGsb28nDDf92HbBpcwh
+  
+2. Get the Jenkins URL to visit by running these commands in the same shell:
+  echo http://127.0.0.1:8080
+  kubectl --namespace default port-forward svc/jenkins-1682524528 8080:8080
+
+3. Login with the password from step 1 and the username: admin
+4. Configure security realm and authorization strategy
+5. Use Jenkins Configuration as Code by specifying configScripts in your values.yaml file, see documentation: http://127.0.0.1:8080/configuration-as-code and examples: https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos
+
+For more information on running Jenkins on Kubernetes, visit:
+https://cloud.google.com/solutions/jenkins-on-container-engine
+
+For more information about Jenkins Configuration as Code, visit:
+https://jenkins.io/projects/jcasc/
+
+
+NOTE: Consider using a custom image with pre-installed plugins
+
+--------------
+
+	
